@@ -1,0 +1,31 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    var registerMessage = TempData["RegisterMessage"] as string;
+}
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/register-style.css" />
+</head>
+<div class="text-center">
+    
+    <div class="mainPage">
+        <h3>Stajını hızlıca bul okulunu bitir!</h3>
+        <form method="post">
+            <div class="registerInput">
+                <input class="registerTextArea" type="text" placeholder="Adınız" id="name" name="name" />
+                <input class="registerTextArea" type="text" placeholder="Soyadınız" id="surname" name="surname" />
+                <input class="registerTextArea" type="email" placeholder="E-mail" id="email" name="email" />
+                <input class="registerTextArea" type="password" placeholder="Parola" id="password" name="password"/>
+                <input id="registerBtn" type="submit" value="Kayıt Ol!" />
+                @if (!string.IsNullOrEmpty(registerMessage))
+                {
+                    <span class="alert">@registerMessage</span>
+                }
+                <h5>Zaten hesabın var mı?</h5>
+                <a href="login">Giriş Yap!</a>
+            </div>
+        </form>
+    </div>
+</div>

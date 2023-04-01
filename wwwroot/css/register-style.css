@@ -1,0 +1,22 @@
+﻿body {
+}
+
+.registerInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.registerTextArea {
+    margin-bottom: 5px;
+}
+
+#registerBtn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.alert {
+    color: red;
+}
