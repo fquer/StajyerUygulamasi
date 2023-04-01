@@ -12,9 +12,18 @@ namespace StajyerUygulamasi.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            var loginStajyerID = HttpContext.Session.GetInt32("loginStajyerID");
+            if (loginStajyerID == null)
+            {
+                TempData["LoginMessage"] = "Oturumunuzun süresi doldu!";
+                return RedirectToPage("Login");
+            }
+            else
+            {
+                return Page();
+            }
         }
     }
 }

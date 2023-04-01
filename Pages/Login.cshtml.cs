@@ -32,13 +32,16 @@ namespace StajyerUygulamasi.Pages
                 var userLoginSuccess = await _db.Stajyer.FirstOrDefaultAsync(dbStajyer => dbStajyer.Email == postEmail && dbStajyer.Password == postPassword);
 
                 if (userLoginSuccess != null) {
+                    HttpContext.Session.SetInt32("loginStajyerID", userLoginSuccess.Id);
                     return Redirect("Interns");
                 }
                 else {
+                    TempData["LoginMessage"] = "Email yada parola hatalı.";
                     return Page();
                 }
             } 
             else {
+                TempData["LoginMessage"] = "Lütfen eksik bilgileri doldurunuz.";
                 return Page();
             }
         }

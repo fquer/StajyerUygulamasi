@@ -1,14 +1,25 @@
 ﻿@page
 @model ProfileModel
+@using Microsoft.AspNetCore.Http
 @{
     ViewData["Title"] = "Your Profile";
+    var loginStajyerID = HttpContext.Session.GetInt32("loginStajyerID");
 }
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="~/css/profile-style.css" />
 </head>
 <div class="text-center">
-    
+
+    @if (loginStajyerID != null)
+    {
+        <span class="alert">@loginStajyerID</span>
+    }
+    else
+    {
+        <span class="alert">Data yok</span>
+    }
+
     <div class="mainPage">
         <div class="profileTopBar">
             <div class="profilePhoto">

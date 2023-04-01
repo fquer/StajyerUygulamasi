@@ -2,6 +2,7 @@
 @model LoginModel
 @{
     ViewData["Title"] = "Login";
+    var loginMessage = TempData["LoginMessage"] as string;
 }
 <head>
     <meta charset="utf-8" />
@@ -16,6 +17,10 @@
                 <input class="loginTextArea" type="email" placeholder="E-mail" id="email" name="email"/>
                 <input class="loginTextArea" type="password" placeholder="Parola" id="password" name="password"/>
                 <input id="loginBtn" type="submit" value="Giriş Yap" />
+                @if (!string.IsNullOrEmpty(loginMessage))
+                {
+                    <span class="alert">@loginMessage</span>
+                }
                 <h5>Hesabın yok mu?</h5>
                 <a href="register">Kayıt Ol!</a>
             </div>
