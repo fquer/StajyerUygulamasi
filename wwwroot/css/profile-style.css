@@ -1,0 +1,26 @@
+﻿body {
+}
+
+.profilePhoto {
+    background-image: url("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+}
+
+.profileTopBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#profileNameSurname {
+    padding-left: 3%
+}
+
+.border {
+    border: 1px solid grey;
+    border-radius: 15px;
+    text-align: left;
+    margin-bottom: 2%;
+}
