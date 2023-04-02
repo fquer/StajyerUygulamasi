@@ -24,3 +24,8 @@
     text-align: left;
     margin-bottom: 2%;
 }
+
+.dateInput {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}

@@ -4,10 +4,13 @@
 @{
     ViewData["Title"] = "Your Profile";
     var loginStajyerID = HttpContext.Session.GetInt32("loginStajyerID");
+    var loginStajyerName = HttpContext.Session.GetString("loginStajyerName");
+    var loginStajyerSurname = HttpContext.Session.GetString("loginStajyerSurname");
 }
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="~/css/profile-style.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 <div class="text-center">
 
@@ -20,29 +23,105 @@
         <span class="alert">Data yok</span>
     }
 
-    <div class="mainPage">
+    <div class="col-md border border-grey p-5">
         <div class="profileTopBar">
             <div class="profilePhoto">
             </div>
-            <h3 id="profileNameSurname">Name_Surname</h3>
+            <h3 id="profileNameSurname">@loginStajyerName @loginStajyerSurname</h3>
         </div>
+        <button class="btn btn-success btn-sm rounded-0 mt-3 closed" id="edit" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i> Bilgileri Düzenle</button>
+        <div class="mt-4">
+            <form asp-page-handler="About" method="post">
+                <div class="row gx-2 border border-grey p-2">
+                    <h4>Hakkımda</h4>
+                    <div class="form-floating mb-3 mt-3">
+                        <textarea class="form-control" id="aboutMe" style="height: 100px" disabled></textarea>
+                        <label for="aboutMe">Hakkımda</label>
+                    </div>
+                    <div class="col input-group mb-3">
+                        <span class="input-group-text">Doğum Tarihi</span>
+                        <input class="dateInput" type="date" id="birthday" name="birthday" disabled>
+                    </div>
+                </div>
+            </form>
+        
+            <div class="row gx-2 border border-grey p-2">
+                <h4>Deneyim</h4>
+                <table class="table">
+                    <tbody>
+                    </tbody>
+                </table>
+                
+                
+                <form asp-page-handler="Experience" method="post" class="row gx-4 editableArea" style="display:none">
+                    <div class="col input-group">
+                        <span class="input-group-text">Şirket Adı</span>
+                        <input type="text" class="form-control" id="experienceCompanyName" name="experienceCompanyName">
+                    </div>
+                    <div class="col input-group">
+                        <span class="input-group-text">Posizyon</span>
+                        <input type="text" class="form-control" id="experiencePosition" name="experiencePosition">
+                    </div>
+                    <div class="col input-group">
+                        <span class="input-group-text">Başlama Tarihi</span>
+                        <input class="dateInput form-control" type="date" id="experienceStartingDate" name="experienceStartingDate">
+                    </div>
+                    <div class="col input-group">
+                        <span class="input-group-text">Bitiş Tarihi</span>
+                        <input class="dateInput form-control" type="date" id="experienceFinishDate" name="experienceFinishDate">
+                    </div>
+                    <div class="col input-group">
+                        <button type="submit" class="btn btn-secondary">+</button>
+                    </div>
+                </form>
+                
+                
+            </div>
 
-        <div class="border profileAboutme">
-            <h3>About</h3>
-        </div>
+            <div class="row gx-2 border border-grey p-2">
+                <h4>Eğitim</h4>
+                <table class="table">
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+                
+                <form asp-page-handler="Education" method="post" class="row gx-4 editableArea" style="display:none">
+                    <div class="col input-group">
+                        <span class="input-group-text">Okul Adı</span>
+                        <input type="text" class="form-control" id="educationSchoolName" name="educationSchoolName">
+                    </div>
 
-        <div class="border profileExperienceHistory">
-            <h3>Experience</h3>
-        </div>
+                    <div class="col input-group">
+                        <span class="input-group-text">Başlama Tarihi</span>
+                        <input class="dateInput form-control" type="date" id="educationStartingDate" name="educationStartingDate">
+                    </div>
 
-        <div class="border profileSchoolHistory">
-            <h3>Education</h3>
-        </div>
+                    <div class="col input-group">
+                        <span class="input-group-text">Bitiş Tarihi</span>
+                        <input class="dateInput form-control" type="date" id="educationFinishDate" name="educationFinishDate">
+                    </div>
+                    <div class="col input-group">
+                        <button type="submit" class="btn btn-secondary">+</button>
+                    </div>
+                </form>
+                
+            </div>
 
-        <div class="border profileSkills">
-            <h3>Skills</h3>
-        </div>
-
-
+            <div class="row gx-2 border border-grey p-2">
+                <h4>Yetenekler</h4>
+                
+                <form asp-page-handler="Skill" method="post" class="input-group mb-3 editableArea" style="display:none">
+                    <span class="input-group-text" id="basic-addon1">Yetenek Ekle</span>
+                    <div class="col-2">
+                        <input type="text" class="form-control" name="skill" id="skill">
+                    </div>
+                    <button type="submit" class="btn btn-secondary">+</button>
+                </form>
+                
+            </div>
+         </div>
     </div>
 </div>
+
+<script type="module" src="~/js/profile.js" asp-append-version="true"></script>

@@ -3,7 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StajyerUygulamasi.Model
 {
-    public class Experience
+    
+    public class Skill
     {
         [Key]
         public int Id { get; set; }
@@ -13,12 +14,6 @@ namespace StajyerUygulamasi.Model
         [Required]
         public Stajyer Stajyer { get; set; }
         [Required]
-        public String CompanyName { get; set; }
-        [Required]
-        public String Position { get; set; }
-        [Required]
-        public DateTime StartTime { get; set; }
-        [Required]
-        public DateTime FinishTime { get; set; }
+        public String SkillName { get; set; }
     }
 }

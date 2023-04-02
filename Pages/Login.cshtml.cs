@@ -33,6 +33,8 @@ namespace StajyerUygulamasi.Pages
 
                 if (userLoginSuccess != null) {
                     HttpContext.Session.SetInt32("loginStajyerID", userLoginSuccess.Id);
+                    HttpContext.Session.SetString("loginStajyerName", userLoginSuccess.Name);
+                    HttpContext.Session.SetString("loginStajyerSurname", userLoginSuccess.Surname);
                     return Redirect("Interns");
                 }
                 else {

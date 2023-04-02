@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace StajyerUygulamasi.Model
 {
-    public class Experience
+    public class Education
     {
         [Key]
         public int Id { get; set; }
@@ -13,9 +13,7 @@ namespace StajyerUygulamasi.Model
         [Required]
         public Stajyer Stajyer { get; set; }
         [Required]
-        public String CompanyName { get; set; }
-        [Required]
-        public String Position { get; set; }
+        public String EducationName { get; set; }
         [Required]
         public DateTime StartTime { get; set; }
         [Required]
