@@ -28,19 +28,22 @@
             <div class="profilePhoto">
             </div>
             <h3 id="profileNameSurname">@loginStajyerName @loginStajyerSurname</h3>
-        </div>
+        </div>  
         <button class="btn btn-success btn-sm rounded-0 mt-3 closed" id="edit" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i> Bilgileri Düzenle</button>
         <div class="mt-4">
             <form asp-page-handler="About" method="post">
                 <div class="row gx-2 border border-grey p-2">
                     <h4>Hakkımda</h4>
                     <div class="form-floating mb-3 mt-3">
-                        <textarea class="form-control" id="aboutMe" style="height: 100px" disabled></textarea>
+                        <textarea class="form-control" id="aboutMe" style="height: 100px" name="aboutMe" disabled></textarea>
                         <label for="aboutMe">Hakkımda</label>
                     </div>
                     <div class="col input-group mb-3">
                         <span class="input-group-text">Doğum Tarihi</span>
-                        <input class="dateInput" type="date" id="birthday" name="birthday" disabled>
+                        <input class="dateInput form-control" type="date" id="birthday" name="birthday">
+                    </div>
+                    <div class="col-3 input-group editableArea" style="display:none">
+                        <button type="submit" class="btn btn-secondary">Kaydet</button>
                     </div>
                 </div>
             </form>

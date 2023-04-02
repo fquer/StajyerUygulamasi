@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using StajyerUygulamasi.Model;
 
 namespace StajyerUygulamasi.Pages
@@ -15,6 +16,7 @@ namespace StajyerUygulamasi.Pages
             _db = db;
         }
 
+        public About About { get; set; }
         public Skill Skill { get; set; }
         public Experience Experience { get; set; }
         public Education Education { get; set; }
@@ -30,6 +32,32 @@ namespace StajyerUygulamasi.Pages
             {
                 return Page();
             }
+        }
+
+        public async Task<IActionResult> OnPostAbout(string aboutMe, DateTime birthday)
+        {
+            if (aboutMe != null && birthday != null)
+            {
+                var dbAbout = await _db.About.FindAsync(keyValues: HttpContext.Session.GetInt32("loginStajyerID"));
+
+
+                if (dbAbout != null)
+                {
+                    dbAbout.AboutText = aboutMe;
+                    dbAbout.DateOfBirth = birthday;
+                }
+                else
+                {
+                    About newAbout = new About();
+                    newAbout.AboutText = aboutMe;
+                    newAbout.DateOfBirth = birthday;
+                    newAbout.StajyerID = (int)HttpContext.Session.GetInt32("loginStajyerID");
+                    await _db.About.AddAsync(newAbout);
+                }
+                await _db.SaveChangesAsync();
+            }
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostSkill(string skill)
