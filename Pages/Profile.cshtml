@@ -6,12 +6,19 @@
     var loginStajyerID = HttpContext.Session.GetInt32("loginStajyerID");
     var loginStajyerName = HttpContext.Session.GetString("loginStajyerName");
     var loginStajyerSurname = HttpContext.Session.GetString("loginStajyerSurname");
+    var aboutText = TempData["AboutText"];
+    var aboutBirthDateSplitted = TempData["AboutBirthDate"].ToString().Split(" ")[0].Split("/");
+    var aboutBirthDate = aboutBirthDateSplitted[2] + "-" + aboutBirthDateSplitted[1] + "-" + aboutBirthDateSplitted[0];
 }
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="~/css/profile-style.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
+
+<script>
+    console.log("@aboutBirthDate")
+</script>
 <div class="text-center">
 
     @if (loginStajyerID != null)
@@ -35,12 +42,12 @@
                 <div class="row gx-2 border border-grey p-2">
                     <h4>Hakkımda</h4>
                     <div class="form-floating mb-3 mt-3">
-                        <textarea class="form-control" id="aboutMe" style="height: 100px" name="aboutMe" disabled></textarea>
+                        <textarea class="form-control" id="aboutMe" style="height: 100px" name="aboutMe" disabled>@aboutText</textarea>
                         <label for="aboutMe">Hakkımda</label>
                     </div>
                     <div class="col input-group mb-3">
                         <span class="input-group-text">Doğum Tarihi</span>
-                        <input class="dateInput form-control" type="date" id="birthday" name="birthday">
+                        <input class="dateInput form-control" type="date" id="birthday" name="birthday" value="@aboutBirthDate" disabled>
                     </div>
                     <div class="col-3 input-group editableArea" style="display:none">
                         <button type="submit" class="btn btn-secondary">Kaydet</button>

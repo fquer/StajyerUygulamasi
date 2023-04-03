@@ -20,7 +20,7 @@ namespace StajyerUygulamasi.Pages
         public Skill Skill { get; set; }
         public Experience Experience { get; set; }
         public Education Education { get; set; }
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
             var loginStajyerID = HttpContext.Session.GetInt32("loginStajyerID");
             if (loginStajyerID == null)
@@ -30,6 +30,26 @@ namespace StajyerUygulamasi.Pages
             }
             else
             {
+                var dbAbout = await _db.About.FindAsync(keyValues: HttpContext.Session.GetInt32("loginStajyerID"));
+                if (dbAbout == null)
+                {
+                    TempData["AboutText"] = "";
+                    TempData["AboutBirthDate"] = null;
+                }
+                else
+                {
+                    if (dbAbout.AboutText == null)
+                    {
+                        TempData["AboutText"] = "";
+                    }
+                    else
+                    {
+                        TempData["AboutText"] = dbAbout.AboutText;
+                    }
+
+                    TempData["AboutBirthDate"] = dbAbout.DateOfBirth;
+                }
+                
                 return Page();
             }
         }
