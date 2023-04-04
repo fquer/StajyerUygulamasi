@@ -55,6 +55,10 @@ namespace StajyerUygulamasi.Pages
 
                 TempData["Experiences"] = dbExperience;
 
+                var dbEducation = await _db.Education.Where(dbEducation => dbEducation.StajyerID == HttpContext.Session.GetInt32("loginStajyerID")).ToListAsync();
+
+                TempData["Educations"] = dbEducation;
+
                 return Page();
             }
         }
@@ -87,7 +91,7 @@ namespace StajyerUygulamasi.Pages
                 await _db.SaveChangesAsync();
             }
 
-            return Page();
+            return await setPageData();
         }
 
         public async Task<IActionResult> OnPostSkill(string skill)
@@ -100,8 +104,8 @@ namespace StajyerUygulamasi.Pages
                 await _db.Skill.AddAsync(newSkill);
                 await _db.SaveChangesAsync();
             }
-            
-            return Page();
+
+            return await setPageData();
         }
 
         public async Task<IActionResult> OnPostExperience(string experienceCompanyName, string experiencePosition, DateTime experienceStartingDate, DateTime experienceFinishDate)
@@ -134,7 +138,7 @@ namespace StajyerUygulamasi.Pages
                 await _db.SaveChangesAsync();
             }
 
-            return Page();
+            return await setPageData();
         }
     }
 }

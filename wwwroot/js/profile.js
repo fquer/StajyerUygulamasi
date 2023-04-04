@@ -85,4 +85,29 @@ window.addEventListener('load', () => {
     else {
         experienceTable.style.display = 'none';
     }
+    console.log(educations)
+    let educationTable = document.getElementById("education");
+    if (educationTable.length != 0) {
+
+        educations.forEach((dbEducation) => {
+            let educationRow = document.createElement("tr");
+
+            let educationName = document.createElement("td");
+            let educationStartTimeData = document.createElement("td");
+            let educationFinishTimeData = document.createElement("td");
+
+            educationName.innerHTML = dbEducation.educationName;
+            educationStartTimeData.innerHTML = dbEducation.startTime.split('T')[0];
+            educationFinishTimeData.innerHTML = dbEducation.finishTime.split('T')[0];
+
+            educationRow.appendChild(educationName);
+            educationRow.appendChild(educationStartTimeData);
+            educationRow.appendChild(educationFinishTimeData);
+
+            educationTable.appendChild(educationRow);
+        })
+    }
+    else {
+        educationTable.style.display = 'none';
+    }
 })
