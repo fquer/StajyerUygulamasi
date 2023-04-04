@@ -9,12 +9,17 @@
     var aboutText = TempData["AboutText"];
     var aboutBirthDateSplitted = TempData["AboutBirthDate"].ToString().Split(" ")[0].Split("/");
     var aboutBirthDate = aboutBirthDateSplitted[2] + "-" + aboutBirthDateSplitted[1] + "-" + aboutBirthDateSplitted[0];
+    var experiences = TempData["Experiences"];
 }
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="~/css/profile-style.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
+
+<script>
+    let experiences = @Html.Raw(Json.Serialize(experiences));
+</script>
 <div class="text-center">
     <div class="col-md border border-grey p-5">
         <div class="profileTopBar">
@@ -43,8 +48,14 @@
         
             <div class="row gx-2 border border-grey p-2">
                 <h4>Deneyim</h4>
-                <table class="table">
+                <table class="table" id="experience">
                     <tbody>
+                        <tr>
+                            <th>Şirket Adı</th>
+                            <th>Pozisyon</th>
+                            <th>Başlama Zamanı</th>
+                            <th>Bitiş Zamanı</th>
+                        </tr>
                     </tbody>
                 </table>
                 

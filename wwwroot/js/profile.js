@@ -57,5 +57,32 @@ window.addEventListener('load', () => {
         }
         
     })
+    
+    let experienceTable = document.getElementById("experience");
+    if (experiences.length != 0) {
 
+        experiences.forEach( (dbExperience) => {
+            let experienceRow = document.createElement("tr");
+
+            let experienceCompanyData = document.createElement("td");
+            let experiencePositionData = document.createElement("td");
+            let experienceStartTimeData = document.createElement("td");
+            let experienceFinishTimeData = document.createElement("td");
+
+            experienceCompanyData.innerHTML = dbExperience.companyName;
+            experiencePositionData.innerHTML = dbExperience.position;
+            experienceStartTimeData.innerHTML = dbExperience.startTime.split('T')[0];
+            experienceFinishTimeData.innerHTML = dbExperience.finishTime.split('T')[0];
+
+            experienceRow.appendChild(experienceCompanyData);
+            experienceRow.appendChild(experiencePositionData);
+            experienceRow.appendChild(experienceStartTimeData);
+            experienceRow.appendChild(experienceFinishTimeData);
+
+            experienceTable.appendChild(experienceRow);
+        })  
+    }
+    else {
+        experienceTable.style.display = 'none';
+    }
 })

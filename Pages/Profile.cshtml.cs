@@ -20,7 +20,8 @@ namespace StajyerUygulamasi.Pages
         public Skill Skill { get; set; }
         public Experience Experience { get; set; }
         public Education Education { get; set; }
-        public async Task<IActionResult> OnGet()
+
+        public async Task<IActionResult> setPageData()
         {
             var loginStajyerID = HttpContext.Session.GetInt32("loginStajyerID");
             if (loginStajyerID == null)
@@ -49,9 +50,18 @@ namespace StajyerUygulamasi.Pages
 
                     TempData["AboutBirthDate"] = dbAbout.DateOfBirth;
                 }
-                
+
+                var dbExperience = await _db.Experience.Where(dbExperience => dbExperience.StajyerID == HttpContext.Session.GetInt32("loginStajyerID")).ToListAsync();
+
+                TempData["Experiences"] = dbExperience;
+
                 return Page();
             }
+        }
+
+        public async Task<IActionResult> OnGet()
+        {
+            return await setPageData();
         }
 
         public async Task<IActionResult> OnPostAbout(string aboutMe, DateTime birthday)
@@ -108,7 +118,7 @@ namespace StajyerUygulamasi.Pages
                 await _db.SaveChangesAsync();
             }
 
-            return Page();
+            return await setPageData();
         }
 
         public async Task<IActionResult> OnPostEducation(string educationSchoolName, DateTime educationStartingDate, DateTime educationFinishDate)
