@@ -110,4 +110,30 @@ window.addEventListener('load', () => {
     else {
         educationTable.style.display = 'none';
     }
+
+    console.log(skills)
+
+    if (skills.length != 0) {
+        let skillsTab = document.getElementById('skillsTab');
+        let rowTab;
+        skills.forEach((dbSkill) => {
+            console.log(dbSkill)
+
+
+
+            let skill = document.createElement('div');
+            ['col-md-4', 'border', 'border-grey', 'p-3', 'm-2'].forEach((cssClass) => {
+                skill.classList.add(cssClass)
+            })
+
+            let skillText = document.createElement('div')
+            skillText.innerHTML = dbSkill.skillName
+
+            skill.appendChild(skillText)
+            skillsTab.appendChild(skill)
+            
+        })
+
+
+    }
 })

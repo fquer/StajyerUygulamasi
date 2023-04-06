@@ -11,6 +11,7 @@
     var aboutBirthDate = aboutBirthDateSplitted[2] + "-" + aboutBirthDateSplitted[1] + "-" + aboutBirthDateSplitted[0];
     var experiences = TempData["Experiences"];
     var educations = TempData["Educations"];
+    var skills = TempData["Skills"];
 }
 <head>
     <meta charset="utf-8" />
@@ -21,6 +22,7 @@
 <script>
     let experiences = @Html.Raw(Json.Serialize(experiences));
     let educations = @Html.Raw(Json.Serialize(educations));
+    let skills = @Html.Raw(Json.Serialize(skills));
 </script>
 <div class="text-center">
     <div class="col-md border border-grey p-5">
@@ -123,7 +125,12 @@
 
             <div class="row gx-2 border border-grey p-2">
                 <h4>Yetenekler</h4>
-                
+                <div class="container text-center">
+                    <div class="row" id="skillsTab">
+
+                    </div>
+                </div>
+
                 <form asp-page-handler="Skill" method="post" class="input-group mb-3 editableArea" style="display:none">
                     <span class="input-group-text" id="basic-addon1">Yetenek Ekle</span>
                     <div class="col-2">

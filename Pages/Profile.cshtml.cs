@@ -59,6 +59,10 @@ namespace StajyerUygulamasi.Pages
 
                 TempData["Educations"] = dbEducation;
 
+                var dbSkill = await _db.Skill.Where(dbSkill => dbSkill.StajyerID == HttpContext.Session.GetInt32("loginStajyerID")).ToListAsync();
+
+                TempData["Skills"] = dbSkill;
+
                 return Page();
             }
         }
