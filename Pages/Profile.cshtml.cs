@@ -51,15 +51,15 @@ namespace StajyerUygulamasi.Pages
                     TempData["AboutBirthDate"] = dbAbout.DateOfBirth;
                 }
 
-                var dbExperience = await _db.Experience.Where(dbExperience => dbExperience.StajyerID == HttpContext.Session.GetInt32("loginStajyerID")).ToListAsync();
+                List<Experience> dbExperience = await _db.Experience.Where(dbExperience => dbExperience.StajyerID == HttpContext.Session.GetInt32("loginStajyerID")).ToListAsync();
 
                 TempData["Experiences"] = dbExperience;
 
-                var dbEducation = await _db.Education.Where(dbEducation => dbEducation.StajyerID == HttpContext.Session.GetInt32("loginStajyerID")).ToListAsync();
+                List<Education> dbEducation = await _db.Education.Where(dbEducation => dbEducation.StajyerID == HttpContext.Session.GetInt32("loginStajyerID")).ToListAsync();
 
                 TempData["Educations"] = dbEducation;
 
-                var dbSkill = await _db.Skill.Where(dbSkill => dbSkill.StajyerID == HttpContext.Session.GetInt32("loginStajyerID")).ToListAsync();
+                List<Skill> dbSkill = await _db.Skill.Where(dbSkill => dbSkill.StajyerID == HttpContext.Session.GetInt32("loginStajyerID")).ToListAsync();
 
                 TempData["Skills"] = dbSkill;
 

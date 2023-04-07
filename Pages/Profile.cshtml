@@ -1,17 +1,26 @@
 ﻿@page
 @model ProfileModel
 @using Microsoft.AspNetCore.Http
+@using StajyerUygulamasi.Model
 @{
     ViewData["Title"] = "Your Profile";
-    var loginStajyerID = HttpContext.Session.GetInt32("loginStajyerID");
     var loginStajyerName = HttpContext.Session.GetString("loginStajyerName");
     var loginStajyerSurname = HttpContext.Session.GetString("loginStajyerSurname");
     var aboutText = TempData["AboutText"];
-    var aboutBirthDateSplitted = TempData["AboutBirthDate"].ToString().Split(" ")[0].Split("/");
-    var aboutBirthDate = aboutBirthDateSplitted[2] + "-" + aboutBirthDateSplitted[1] + "-" + aboutBirthDateSplitted[0];
-    var experiences = TempData["Experiences"];
-    var educations = TempData["Educations"];
-    var skills = TempData["Skills"];
+    var aboutBirthDate = "";
+    if (TempData["AboutBirthDate"] != null)
+    {
+        var aboutBirthDateSplitted = TempData["AboutBirthDate"].ToString().Split(" ")[0].Split("/");
+        aboutBirthDate = aboutBirthDateSplitted[2] + "-" + aboutBirthDateSplitted[1] + "-" + aboutBirthDateSplitted[0];
+    }
+    else
+    {
+        aboutBirthDate = "2001-07-28";
+    }
+
+    var experiences = (List<Experience>)TempData["Experiences"];
+    var educations = (List<Education>)TempData["Educations"];
+    var skills = (List<Skill>)TempData["Skills"];
 }
 <head>
     <meta charset="utf-8" />
@@ -19,11 +28,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 
-<script>
-    let experiences = @Html.Raw(Json.Serialize(experiences));
-    let educations = @Html.Raw(Json.Serialize(educations));
-    let skills = @Html.Raw(Json.Serialize(skills));
-</script>
 <div class="text-center">
     <div class="col-md border border-grey p-5">
         <div class="profileTopBar">
@@ -54,12 +58,28 @@
                 <h4>Deneyim</h4>
                 <table class="table" id="experience">
                     <tbody>
-                        <tr>
-                            <th>Şirket Adı</th>
-                            <th>Pozisyon</th>
-                            <th>Başlama Zamanı</th>
-                            <th>Bitiş Zamanı</th>
-                        </tr>
+                        @if (experiences.Count > 0)
+                        {
+                            <tr>
+                                <th>Şirket Adı</th>
+                                <th>Pozisyon</th>
+                                <th>Başlama Zamanı</th>
+                                <th>Bitiş Zamanı</th>
+                            </tr>
+                        }
+                        else
+                        {
+                            <span>Deneyim geçmişi bulunamadı.</span>
+                        }
+                        @foreach (var experience in experiences)
+                        {
+                            <tr>
+                                <td>@experience.CompanyName</td>
+                                <td>@experience.Position</td>
+                                <td>@experience.StartTime.ToString().Split(" ")[0]</td>
+                                <td>@experience.FinishTime.ToString().Split(" ")[0]</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
                 
@@ -93,11 +113,26 @@
                 <h4>Eğitim</h4>
                 <table class="table" id="education">
                     <tbody>
-                        <tr>
-                            <th>Okul Adı</th>
-                            <th>Başlama Zamanı</th>
-                            <th>Bitiş Zamanı</th>
-                        </tr>
+                        @if (educations.Count > 0)
+                        {
+                            <tr>
+                                <th>Okul Adı</th>
+                                <th>Başlama Zamanı</th>
+                                <th>Bitiş Zamanı</th>
+                            </tr>
+                        }
+                        else
+                        {
+                            <span>Eğitim geçmişi bulunamadı.</span>
+                        }
+                        @foreach (var education in educations)
+                        {
+                            <tr>
+                                <td>@education.EducationName</td>
+                                <td>@education.StartTime.ToString().Split(" ")[0]</td>
+                                <td>@education.FinishTime.ToString().Split(" ")[0]</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
                 
@@ -127,7 +162,19 @@
                 <h4>Yetenekler</h4>
                 <div class="container text-center">
                     <div class="row" id="skillsTab">
-
+                        @if (skills.Count > 0)
+                        {
+                            @foreach (var skill in skills)
+                            {
+                                <div class="col-md-4 border border-grey p-3 m-2">
+                                    @skill.SkillName
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <span>Yetenek ekleyin!</span>
+                        }
                     </div>
                 </div>
 
