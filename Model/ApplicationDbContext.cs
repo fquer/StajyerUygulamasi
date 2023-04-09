@@ -14,5 +14,7 @@ namespace StajyerUygulamasi.Model
         public DbSet<About> About { get; set; }
         public DbSet<Skill> Skill { get; set; }
         public DbSet<Education> Education { get; set; }
+        public DbSet<Intern> Intern { get; set; }
+        public DbSet<InternSubmitted> InternSubmitted { get; set; }
     }
 }
