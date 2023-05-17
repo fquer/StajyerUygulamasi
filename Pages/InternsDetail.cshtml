@@ -1,9 +1,9 @@
 ﻿@page
 @model StajyerUygulamasi.Pages.InternsDetailModel
-@using StajyerUygulamasi.Model
+@using StajyerUygulamasi.Dto
 @{
     ViewData["Title"] = "Interns";
-    Intern intern = (Intern)ViewData["Intern"];
+    InternDto intern = (InternDto)ViewData["Intern"];
 }
 <head>
     <meta charset="utf-8" />
@@ -12,30 +12,36 @@
 </head>
 
 <div class="text-center">
-
-    <div class="card p-3 mb-2" id="@intern.Id">
-        <div class="d-flex">
-            <div class="d-flex flex-row align-items-center">
-                <div class="icon"> <i class="bx bxl-mailchimp"></i> </div>
-                <div class="ms-2 c-details">
-                    <h6 class="mb-0">@intern.CompanyName</h6> <span>@intern.OpenTime</span>
-                </div>
+    <form method="post">
+        <div class="card p-3 mb-2" id="@intern.Id">
+            <div class="d-flex">
+                <div class="d-flex flex-row align-items-center">
+                    <div class="icon"> <i class="bx bxl-mailchimp"></i> </div>
+                    <div class="ms-2 c-details">
+                        <h6 class="mb-0">@intern.CompanyName</h6> <span>@intern.OpenTime</span>
+                    </div>
                     
-            </div>
+                </div>
                 
-        </div>
-        <h3 class="heading m-auto">@intern.Position</h3>
-        <div class="mt-5">
-            <div>
-            <div> <p class="detail m-5" id="internDetails"></p> </div>
-
-                <div class="mt-5"> <span class="text1">@intern.ApplicantsCounter kişi başvurdu!</span> </div>
-
-                <button type="button" id="submitBtn" class="btn btn-success btn-icon-text mt-2"> <i class="fa fa-check btn-icon-prepend"></i> Başvur! </button>
+            </div>
+            <h3 class="heading m-auto">@intern.Position</h3>
+            <div class="mt-5">
+                <div>
+                <div> <p class="detail m-5" id="internDetails"></p> </div>
+                    <input hidden value="@intern.Id" name="internID" />
+                    <div class="mt-5"> <span class="text1">@intern.ApplicantsCounter kişi başvurdu!</span> </div>
+                    @if (intern.isAplied == false)
+                    {
+                        <input type="submit" id="submitBtn" value="Başvur!" class="btn btn-success btn-icon-text mt-2" />
+                    }
+                    else
+                    {
+                        <input type="submit" id="submitBtn" value="Zaten Başvuruldu" class="btn btn-success btn-icon-text mt-2" disabled/>
+                    }
+                </div>
             </div>
         </div>
-    </div>
-    
+    </form>
 </div>
 
 <script>

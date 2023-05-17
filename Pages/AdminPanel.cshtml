@@ -1,0 +1,34 @@
+﻿@page
+@model AdminPanel
+@using StajyerUygulamasi.Model
+@{
+    ViewData["Title"] = "AdminPanel";
+}
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<div class="text-center">
+    <h2>Admin Paneli</h2>
+
+    <div class="border border-3 mt-4 p-4">
+        <h3>Stajyer Arama İlanı Ekleme</h3>
+        <form method="post" form asp-page-handler="InternAdd">
+            <div class="mt-4">
+                <input type="text" name="CompanyName" placeholder="Şirket İsmi" />
+                <input type="text" name="Position" placeholder="Pozisyon" />
+            </div>
+            <div class="mt-4">
+                <label for="details">Detaylar</label>
+                <textarea id="details" style="width: 100%; height: 300px" type="text" name="Details"></textarea>
+            </div>
+            
+            <input type="submit" value="Ekle"/>
+        </form>
+    </div>
+
+    
+</div>
+<script>
+    
+</script>
